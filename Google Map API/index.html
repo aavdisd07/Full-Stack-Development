@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Map API</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC1-IxJ85Eyg63dWxPom8injnYX04aVQPs&callback=initMap&libraries=places"></script>
+</head>
+<script>
+    var map;
+    var infowindow;
+
+    function initialize() {
+        var pyrmont = new google.maps.LatLng(20.5937, 78.9629);
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: pyrmont,
+            zoom: 15
+        });
+
+        var input = document.getElementById('searchTextField');
+        var autocomplete = new google.maps.places.Autocomplete(input);
+
+        autocomplete.bindTo('bounds', map);
+
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                window.alert("No details available for input: '" + place.name + "'");
+                return;
+            }
+
+            
+            if (place.geometry.viewport) {
+                map.fitBounds(place.geometry.viewport);
+            } else {
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);  }
+
+            
+            var marker = new google.maps.Marker({
+                map: map,
+                position: place.geometry.location
+            });
+
+
+            infowindow.setContent(place.name);
+            infowindow.open(map, marker);
+        });
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+<body>
+    <input id="searchTextField" type="text" size="50" placeholder="Enter the Location">
+    <div id="map" style="margin-top: 100px; height: 500px;"></div>
+</body>
+</html>
