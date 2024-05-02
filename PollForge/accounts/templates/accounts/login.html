@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="vh-100 d-flex justify-content-center align-items-center bg-dark">
+        <div class="col-md-6 p-5 rounded-lg" id="login-box">
+            <h2 class="text-center mb-4 text-primary">Login</h2>
+            {% if messages %}
+                <div class="messages">
+                    {% for message in messages %}
+                        <div {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <form action="" method="post" class="p-3">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" class="form-control rounded-pill" id="username"
+                           aria-describedby="username" name="username" placeholder="Username" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control rounded-pill" name="password"
+                           placeholder="Password" required>
+                </div>
+                <div class="d-grid">
+                    <button class="btn btn-lg rounded-pill" type="submit" id="login-btn">Login</button>
+                </div>
+            </form>
+            <div class="mt-3 text-center">
+                <p class="mb-0 text-secondary">Don't have an account? <a href="{% url 'accounts:register' %}"
+                                                                          class="text-primary fw-bold">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block custom_css %}
+<style>
+    #login-box {
+        background-color: #f8f9fa; /* Light grey background */
+        border: 2px solid #007bff; /* Initial border color */
+        transition: border-color 0.5s; /* Border color transition */
+    }
+
+    #login-box:hover {
+        border-color: #28a745; /* Change border color on hover */
+    }
+
+    #login-btn {
+        background-color: #007bff; /* Initial button color */
+        color: #fff; /* Text color */
+        transition: background-color 0.5s, color 0.5s; /* Button color transition */
+    }
+
+    #login-btn:hover {
+        background-color: #ffc107; /* Change background color on hover */
+        color: #914c4c7f; /* Change text color on hover */
+    }
+
+    /* Add border to text fields */
+    .form-control {
+        border: 1px solid #ced4da; /* Border color */
+    }
+</style>
+{% endblock %}

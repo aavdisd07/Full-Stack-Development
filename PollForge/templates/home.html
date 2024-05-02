@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block custom_css %}
+<link rel="stylesheet" href="{% static 'css/home_style.css' %}">
+<style>
+    /* Additional CSS for enhanced styling */
+    body {
+        background-color: #B6F0FF; /* Light grey background */
+    }
+
+    #home-content {
+        text-align: center;
+        padding-top: 100px; /* Adjust the padding for better centering */
+    }
+
+    h1 {
+        color: #343a40; /* Dark grey for headings */
+        font-size: 48px; /* Increase font size for better emphasis */
+    }
+
+    h3 {
+        color: #6c757d; /* Light grey for subheadings */
+        font-size: 24px; /* Increase font size for better readability */
+        margin-bottom: 30px; /* Add some space below the subheading */
+    }
+
+    .btn-light {
+        background-color: #007bff; /* Blue button */
+        color: #fff; /* White text */
+        border-radius: 8px; /* Rounded corners */
+        padding: 12px 24px; /* Increase padding for better button size */
+        font-size: 18px; /* Increase font size for better readability */
+        transition: all 0.3s ease; /* Smooth transition */
+    }
+
+    .btn-light:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+</style>
+{% endblock custom_css %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="home-content">
+                <img src="static\img\background2.jpg" alt="PollMe Image" width="400">
+                <!-- Inserted the provided image with appropriate width -->
+                <h1>PollForge</h1>
+                <h3>Your Voice Matters!</h3>
+                <a class="btn btn-light btn-lg" href="{% url 'polls:list' %}" role="button">Get Started!</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
